@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t mathan/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t mathanm/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true mathan/react-test npm test
+  - docker run -e CI=true mathanm/react-test npm test
 
 after_success:
-  - docker build -t mathan/multi-client ./client
-  - docker build -t mathan/multi-nginx ./nginx
-  - docker build -t mathan/multi-server ./server
-  - docker build -t mathan/multi-worker ./worker
+  - docker build -t mathanm/multi-client ./client
+  - docker build -t mathanm/multi-nginx ./nginx
+  - docker build -t mathanm/multi-server ./server
+  - docker build -t mathanm/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push mathan/multi-client
-  - docker push mathan/multi-nginx
-  - docker push mathan/multi-server
-  - docker push mathan/multi-worker
+  - docker push mathanm/multi-client
+  - docker push mathanm/multi-nginx
+  - docker push mathanm/multi-server
+  - docker push mathanm/multi-worker
